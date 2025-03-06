@@ -16,6 +16,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { ExitToApp, Add } from '@mui/icons-material';
 import axios from 'axios';
 import { useLanguage } from '../../contexts/LanguageContext';
+import UserForm from './UserForm';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -47,6 +48,7 @@ const AdminDashboard = () => {
   const [error, setError] = useState('');
   const [employees, setEmployees] = useState([]);
   const [schedules, setSchedules] = useState([]);
+  const [isUserFormOpen, setIsUserFormOpen] = useState(false);
 
   useEffect(() => {
     // Check if user is logged in and is admin
@@ -111,6 +113,18 @@ const AdminDashboard = () => {
     );
   }
 
+  const handleAddUser = () => {
+    setIsUserFormOpen(true);
+  };
+
+  const handleUserFormClose = () => {
+    setIsUserFormOpen(false);
+  };
+
+  const handleUserFormSuccess = () => {
+    fetchEmployees(localStorage.getItem('token') || '');
+  };
+
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
@@ -146,7 +160,7 @@ const AdminDashboard = () => {
               variant="contained"
               color="primary"
               startIcon={<Add />}
-              onClick={() => {}}
+              onClick={handleAddUser}
             >
               {t('admin.employees.add')}
             </Button>
@@ -181,6 +195,12 @@ const AdminDashboard = () => {
           </Typography>
         </TabPanel>
       </Paper>
+
+      <UserForm
+        open={isUserFormOpen}
+        onClose={handleUserFormClose}
+        onSuccess={handleUserFormSuccess}
+      />
     </Container>
   );
 };

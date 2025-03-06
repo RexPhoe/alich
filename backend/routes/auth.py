@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 from datetime import datetime, timedelta
 from models.user import User, db
 from models.employee import Employee
+from utils.db_logger import log_database_query, log_query_details, log_error
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -14,19 +15,25 @@ def login():
     if not data or not data.get('username') or not data.get('password'):
         return jsonify({'message': 'Datos incompletos', 'error': 'Se requiere nombre de usuario y contraseña'}), 400
     
-    user = User.query.filter_by(username=data['username']).first()
-    
-    if not user or not user.check_password(data['password']):
-        return jsonify({'message': 'Credenciales inválidas', 'error': 'Usuario o contraseña incorrectos'}), 401
-    
-    # Create access token
-    access_token = create_access_token(identity=user.id)
-    
-    return jsonify({
-        'message': 'Inicio de sesión exitoso',
-        'access_token': access_token,
-        'user': user.to_dict()
-    }), 200
+    try:
+        # Log the query details
+        log_query_details("User.query.filter_by(username=?).first()", {"username": data['username']})
+        user = User.query.filter_by(username=data['username']).first()
+        
+        if not user or not user.check_password(data['password']):
+            return jsonify({'message': 'Credenciales inválidas', 'error': 'Usuario o contraseña incorrectos'}), 401
+        
+        # Create access token
+        access_token = create_access_token(identity=user.id)
+        
+        return jsonify({
+            'message': 'Inicio de sesión exitoso',
+            'access_token': access_token,
+            'user': user.to_dict()
+        }), 200
+    except Exception as e:
+        log_error(e, "Login attempt failed")
+        return jsonify({'message': 'Error en el inicio de sesión', 'error': str(e)}), 500
 
 @auth_bp.route('/register', methods=['POST'])
 @jwt_required()
