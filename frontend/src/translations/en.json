@@ -1,0 +1,75 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "logout": "Logout"
+  },
+  "auth": {
+    "title": "ALICH - Attendance Control System",
+    "subtitle": "Sign in",
+    "username": "Username",
+    "password": "Password",
+    "signIn": "Sign In",
+    "signingIn": "Signing in...",
+    "loginFailed": "Login failed. Please try again."
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "employees": "Employees",
+      "schedules": "Work Schedules",
+      "departments": "Departments"
+    },
+    "employees": {
+      "title": "Employee Management",
+      "add": "Add Employee",
+      "edit": "Edit Employee",
+      "name": "Name",
+      "email": "Email",
+      "department": "Department",
+      "position": "Position",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "schedules": {
+      "title": "Work Schedule Management",
+      "add": "Add Schedule",
+      "edit": "Edit Schedule",
+      "employee": "Employee",
+      "dayOfWeek": "Day of Week",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "actions": "Actions"
+    }
+  },
+  "employee": {
+    "dashboard": {
+      "title": "Employee Dashboard",
+      "info": "Employee Information",
+      "attendance": "Today's Attendance",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "checkingIn": "Checking in...",
+      "checkingOut": "Checking out..."
+    },
+    "info": {
+      "name": "Name",
+      "email": "Email",
+      "department": "Department",
+      "position": "Position",
+      "notAssigned": "Not assigned"
+    },
+    "attendance": {
+      "date": "Date",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "duration": "Duration",
+      "notCheckedIn": "Not checked in",
+      "notCheckedOut": "Not checked out",
+      "noAttendance": "You have not checked in today.",
+      "currentlyCheckedIn": "You are currently checked in.",
+      "shiftCompleted": "You have completed your shift for today."
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "logout": "Cerrar sesión"
+  },
+  "auth": {
+    "title": "ALICH - Sistema de Control de Asistencia",
+    "subtitle": "Iniciar sesión",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "signIn": "Iniciar sesión",
+    "signingIn": "Iniciando sesión...",
+    "loginFailed": "Error de inicio de sesión. Por favor, inténtelo de nuevo."
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Panel de Administrador",
+      "employees": "Empleados",
+      "schedules": "Horarios de Trabajo",
+      "departments": "Departamentos"
+    },
+    "employees": {
+      "title": "Gestión de Empleados",
+      "add": "Añadir Empleado",
+      "edit": "Editar Empleado",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "department": "Departamento",
+      "position": "Cargo",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "schedules": {
+      "title": "Gestión de Horarios de Trabajo",
+      "add": "Añadir Horario",
+      "edit": "Editar Horario",
+      "employee": "Empleado",
+      "dayOfWeek": "Día de la semana",
+      "startTime": "Hora de inicio",
+      "endTime": "Hora de fin",
+      "actions": "Acciones"
+    }
+  },
+  "employee": {
+    "dashboard": {
+      "title": "Panel de Empleado",
+      "info": "Información del Empleado",
+      "attendance": "Asistencia de Hoy",
+      "checkIn": "Registrar Entrada",
+      "checkOut": "Registrar Salida",
+      "checkingIn": "Registrando entrada...",
+      "checkingOut": "Registrando salida..."
+    },
+    "info": {
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "department": "Departamento",
+      "position": "Cargo",
+      "notAssigned": "No asignado"
+    },
+    "attendance": {
+      "date": "Fecha",
+      "checkIn": "Entrada",
+      "checkOut": "Salida",
+      "duration": "Duración",
+      "notCheckedIn": "No ha registrado entrada",
+      "notCheckedOut": "No ha registrado salida",
+      "noAttendance": "No ha registrado entrada hoy.",
+      "currentlyCheckedIn": "Actualmente ha registrado entrada.",
+      "shiftCompleted": "Ha completado su turno por hoy."
+    }
+  }
+}
