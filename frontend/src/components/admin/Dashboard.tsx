@@ -17,6 +17,7 @@ import { ExitToApp, Add } from '@mui/icons-material';
 import axios from 'axios';
 import { useLanguage } from '../../contexts/LanguageContext';
 import UserForm from './UserForm';
+import TeamList from './TeamList';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -49,6 +50,7 @@ const AdminDashboard = () => {
   const [employees, setEmployees] = useState([]);
   const [schedules, setSchedules] = useState([]);
   const [isUserFormOpen, setIsUserFormOpen] = useState(false);
+  const [teamsLoaded, setTeamsLoaded] = useState(false);
 
   useEffect(() => {
     // Check if user is logged in and is admin
@@ -151,6 +153,7 @@ const AdminDashboard = () => {
         <Tabs value={tabValue} onChange={handleTabChange} aria-label="admin tabs">
           <Tab label={t('admin.dashboard.employees')} />
           <Tab label={t('admin.dashboard.schedules')} />
+          <Tab label={t('admin.dashboard.teams')} />
         </Tabs>
 
         <TabPanel value={tabValue} index={0}>
@@ -193,6 +196,10 @@ const AdminDashboard = () => {
           <Typography variant="body1">
             Work schedule management coming soon...
           </Typography>
+        </TabPanel>
+        
+        <TabPanel value={tabValue} index={2}>
+          <TeamList />
         </TabPanel>
       </Paper>
 

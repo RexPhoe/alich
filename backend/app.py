@@ -9,6 +9,7 @@ from models import db
 from routes.auth import auth_bp
 from routes.employees import employees_bp
 from routes.attendance import attendance_bp
+from routes.teams import teams_bp
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -20,17 +21,45 @@ db.init_app(app)
 # Initialize JWT Manager
 jwt = JWTManager(app)
 
+# Configure JWT settings
+app.config['JWT_TOKEN_LOCATION'] = ['headers']
+app.config['JWT_HEADER_NAME'] = 'Authorization'
+app.config['JWT_HEADER_TYPE'] = 'Bearer'
+
+@jwt.invalid_token_loader
+def invalid_token_callback(error):
+    return jsonify({
+        'message': 'Token inválido',
+        'error': 'El token proporcionado no es válido'
+    }), 401
+
+@jwt.expired_token_loader
+def expired_token_callback(jwt_header, jwt_payload):
+    return jsonify({
+        'message': 'Token expirado',
+        'error': 'El token ha expirado'
+    }), 401
+
+@jwt.unauthorized_loader
+def missing_token_callback(error):
+    return jsonify({
+        'message': 'Token no proporcionado',
+        'error': 'Se requiere un token de acceso'
+    }), 401
+
 # Enable CORS with specific configuration
 CORS(app, resources={
     r"/api/*": {
         "origins": ["http://localhost:5173"],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
     },
     r"/api/*/*": {
         "origins": ["http://localhost:5173"],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
     }
 })
 
@@ -38,6 +67,7 @@ CORS(app, resources={
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
 app.register_blueprint(employees_bp, url_prefix='/api/employees')
 app.register_blueprint(attendance_bp, url_prefix='/api/attendance')
+app.register_blueprint(teams_bp, url_prefix='/api/teams')
 
 # Root route
 @app.route('/')

@@ -32,7 +32,7 @@ const Login = () => {
       });
 
       // Store token in localStorage
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
       // Redirect based on role
